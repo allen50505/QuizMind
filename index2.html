@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMind</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #fff0ff;
+      color: #4b1c71;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Barra lateral */
+    .sidebar {
+      width: 220px;
+      background-color: #4b1c71;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #fff0ff;
+    }
+
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 10px;
+    }
+
+    .tab {
+      background-color: transparent;
+      color: white;
+      border: none;
+      padding: 12px;
+      text-align: left;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tab:hover,
+    .tab.active {
+      background-color: #b57edc;
+      color: #4b1c71;
+    }
+
+    .logout {
+      background-color: #b57edc;
+      border: none;
+      color: #4b1c71;
+      font-weight: bold;
+      padding: 12px;
+      margin: 0 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .logout:hover {
+      background-color: #fff0ff;
+    }
+
+    /* Contenido */
+    .content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .message {
+      text-align: center;
+      margin: auto;
+      font-size: 1.6rem;
+      color: #4b1c71;
+      display: none;
+    }
+
+    .interface-placeholder {
+      background-color: #fff0ff;
+      border: 2px dashed #b57edc;
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      color: #4b1c71;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <h2>QuizMind</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="interfaz1">Interfaz 1</button>
+        <button class="tab" data-tab="interfaz2">Interfaz 2</button>
+        <button class="tab" data-tab="interfaz3">Interfaz 3</button>
+      </div>
+    </div>
+    <button class="logout" id="logout">Cerrar sesión</button>
+  </div>
+
+  <div class="content">
+    <div id="interfaz1" class="tab-content active">
+      <div class="interface-placeholder">
+        <h3>Interfaz 1</h3>
+        <p>Aquí iría la primera interfaz (por ejemplo: registro o inicio).</p>
+      </div>
+    </div>
+
+    <div id="interfaz2" class="tab-content">
+      <div class="interface-placeholder">
+        <h3>Interfaz 2</h3>
+        <p>Aquí se muestra otra vista (por ejemplo: consultas o estadísticas).</p>
+      </div>
+    </div>
+
+    <div id="interfaz3" class="tab-content">
+      <div class="interface-placeholder">
+        <h3>Interfaz 3</h3>
+        <p>Simulación de una tercera interfaz (por ejemplo: configuración o reportes).</p>
+      </div>
+    </div>
+
+    <div class="message" id="logout-message">
+      💜 Por favor apruébenos 💜
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".tab-content");
+    const logoutBtn = document.getElementById("logout");
+    const message = document.getElementById("logout-message");
+
+    // Cambiar pestañas
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        const target = tab.getAttribute("data-tab");
+        contents.forEach(c => {
+          c.classList.remove("active");
+          if (c.id === target) c.classList.add("active");
+        });
+      });
+    });
+
+    // Cerrar sesión
+    logoutBtn.addEventListener("click", () => {
+      document.querySelector(".sidebar").style.display = "none";
+      document.querySelector(".content").style.display = "flex";
+      contents.forEach(c => c.style.display = "none");
+      message.style.display = "block";
+    });
+  </script>
+</body>
+</html>
