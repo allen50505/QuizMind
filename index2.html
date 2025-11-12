@@ -1,185 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuizMind</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background-color: #fff0ff;
-      color: #4b1c71;
-      display: flex;
-      height: 100vh;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QuizMind - Panel</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #fff0ff;
+    display: flex;
+    height: 100vh;
+  }
 
-    /* Barra lateral */
-    .sidebar {
-      width: 220px;
-      background-color: #4b1c71;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px 0;
-      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
-    }
+  /* Lateral */
+  .sidebar {
+    width: 220px;
+    background-color: #4b1c71;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
 
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: #fff0ff;
-    }
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff0ff;
+  }
 
-    .tabs {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 0 10px;
-    }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-    .tab {
-      background-color: transparent;
-      color: white;
-      border: none;
-      padding: 12px;
-      text-align: left;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+  .tab-btn:hover, .tab-btn.active {
+    background-color: #b57edc;
+  }
 
-    .tab:hover,
-    .tab.active {
-      background-color: #b57edc;
-      color: #4b1c71;
-    }
+  .logout {
+    margin-top: auto;
+    padding: 12px 20px;
+    background-color: #b57edc;
+    border: none;
+    color: #4b1c71;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-    .logout {
-      background-color: #b57edc;
-      border: none;
-      color: #4b1c71;
-      font-weight: bold;
-      padding: 12px;
-      margin: 0 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+  /* Contenido */
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
 
-    .logout:hover {
-      background-color: #fff0ff;
-    }
+  .tab-content {
+    display: none;
+  }
 
-    /* Contenido */
-    .content {
-      flex: 1;
-      padding: 30px;
-      overflow-y: auto;
-    }
+  .tab-content.active {
+    display: block;
+  }
 
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
+  h3 {
+    color: #4b1c71;
+  }
 
-    .tab-content.active {
-      display: block;
-    }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 15px;
+  }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
+  table, th, td {
+    border: 1px solid #b57edc;
+  }
 
-    .message {
-      text-align: center;
-      margin: auto;
-      font-size: 1.6rem;
-      color: #4b1c71;
-      display: none;
-    }
+  th, td {
+    padding: 8px;
+    text-align: center;
+  }
 
-    .interface-placeholder {
-      background-color: #fff0ff;
-      border: 2px dashed #b57edc;
-      border-radius: 12px;
-      padding: 3rem;
-      text-align: center;
-      color: #4b1c71;
-      font-size: 1.2rem;
-    }
-  </style>
+  input, select, textarea, button {
+    border: 1px solid #b57edc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 3px;
+  }
+
+  button {
+    background-color: #b57edc;
+    color: #4b1c71;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #4b1c71;
+    color: white;
+  }
+
+  .center {
+    text-align: center;
+    margin-top: 40px;
+  }
+</style>
 </head>
 <body>
   <div class="sidebar">
-    <div>
-      <h2>QuizMind</h2>
-      <div class="tabs">
-        <button class="tab active" data-tab="interfaz1">Interfaz 1</button>
-        <button class="tab" data-tab="interfaz2">Interfaz 2</button>
-        <button class="tab" data-tab="interfaz3">Interfaz 3</button>
-      </div>
-    </div>
-    <button class="logout" id="logout">Cerrar sesión</button>
+    <h2>QuizMind</h2>
+    <button class="tab-btn active" onclick="showTab('consultar')">Consultar incrementos</button>
+    <button class="tab-btn" onclick="showTab('habilitar')">Registrar habilitación</button>
+    <button class="tab-btn" onclick="showTab('unitario')">Nuevo incremento unitario</button>
+    <button class="logout" onclick="logout()">Cerrar sesión</button>
   </div>
 
-  <div class="content">
-    <div id="interfaz1" class="tab-content active">
-      <div class="interface-placeholder">
-        <h3>Interfaz 1</h3>
-        <p>Aquí iría la primera interfaz (por ejemplo: registro o inicio).</p>
-      </div>
+  <div class="content" id="content">
+    <!-- Consultar incrementos -->
+    <div id="consultar" class="tab-content active">
+      <h3>Consultar incrementos</h3>
+      <label>Fecha:</label><input type="date">
+      <label>Usuario:</label><input type="text">
+      <br><br>
+      <label>Unidad:</label><select><option>Unidad 1</option></select>
+      <label>Tipo incremento:</label><select><option>Tipo A</option></select>
+      <button>Buscar</button>
+      <br><br>
+      <table>
+        <tr>
+          <th>Número</th><th>Unidad</th><th>Tipo</th><th>Estado</th>
+          <th>Fecha creación</th><th>Cant. preguntas</th><th>Visualización</th><th>Selección</th>
+        </tr>
+        <tr><td>1</td><td>U1</td><td>A</td><td>Activo</td><td>2025-11-12</td><td>10</td><td>👁️</td><td><input type="checkbox"></td></tr>
+      </table>
+      <button>Registrar habilitación de incremento</button>
     </div>
 
-    <div id="interfaz2" class="tab-content">
-      <div class="interface-placeholder">
-        <h3>Interfaz 2</h3>
-        <p>Aquí se muestra otra vista (por ejemplo: consultas o estadísticas).</p>
-      </div>
+    <!-- Registrar habilitación -->
+    <div id="habilitar" class="tab-content">
+      <h3>Registrar habilitación de incremento</h3>
+      <label>Fecha:</label><input type="date">
+      <label>Usuario:</label><input type="text"><br><br>
+      <table>
+        <tr><th>Número</th><th>Nombre</th><th>Unidad</th><th>Tipo incremento</th></tr>
+        <tr><td>1</td><td>Test</td><td>U1</td><td>A</td></tr>
+      </table>
+      <table>
+        <tr><th>Número</th><th>Nombre</th><th>Turno</th><th>Selección</th></tr>
+        <tr><td>101</td><td>Curso A</td><td>Mañana</td><td><input type="checkbox"></td></tr>
+      </table>
+      <br>
+      <label>Fecha inicio:</label><input type="date">
+      <label>Hora inicio:</label><input type="time"><br>
+      <label>Fecha cierre:</label><input type="date">
+      <label>Hora cierre:</label><input type="time"><br>
+      <label>Tiempo límite:</label><input type="text">
+      <label>Cantidad de intentos:</label><input type="number" min="1">
+      <br>
+      <label>Descripción:</label><br>
+      <textarea rows="4" cols="60"></textarea><br><br>
+      <button>Confirmar habilitación</button>
     </div>
 
-    <div id="interfaz3" class="tab-content">
-      <div class="interface-placeholder">
-        <h3>Interfaz 3</h3>
-        <p>Simulación de una tercera interfaz (por ejemplo: configuración o reportes).</p>
-      </div>
-    </div>
-
-    <div class="message" id="logout-message">
-       Por favor apruébenos <3
+    <!-- Nuevo incremento unitario -->
+    <div id="unitario" class="tab-content">
+      <h3>Registrar nuevo incremento unitario</h3>
+      <label>Fecha:</label><input type="date">
+      <label>Usuario:</label><input type="text"><br><br>
+      <label>Título incremento:</label><input type="text">
+      <label>Unidad:</label><select><option>U1</option></select>
+      <label>Estado:</label><select><option>Activo</option></select>
+      <button>Buscar</button><br><br>
+      <h4>Banco de preguntas</h4>
+      <table>
+        <tr><th>Número</th><th>Pregunta</th><th>Estado</th><th>Seleccionar</th></tr>
+        <tr><td>1</td><td>Pregunta ejemplo</td><td>Activo</td><td><input type="checkbox"></td></tr>
+      </table>
+      <label>Total preguntas seleccionadas:</label><input type="number" value="1">
+      <br><br>
+      <button>Crear</button>
+      <br><br>
+      <h4>Previsualización</h4>
+      <textarea rows="4" cols="60" placeholder="Vista previa de preguntas..."></textarea>
+      <br><br>
+      <button>Confirmar registro</button>
     </div>
   </div>
 
   <script>
-    const tabs = document.querySelectorAll(".tab");
-    const contents = document.querySelectorAll(".tab-content");
-    const logoutBtn = document.getElementById("logout");
-    const message = document.getElementById("logout-message");
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelector(`.tab-btn[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
 
-    // Cambiar pestañas
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-
-        const target = tab.getAttribute("data-tab");
-        contents.forEach(c => {
-          c.classList.remove("active");
-          if (c.id === target) c.classList.add("active");
-        });
-      });
-    });
-
-    // Cerrar sesión
-    logoutBtn.addEventListener("click", () => {
-      document.querySelector(".sidebar").style.display = "none";
-      document.querySelector(".content").style.display = "flex";
-      contents.forEach(c => c.style.display = "none");
-      message.style.display = "block";
-    });
+    function logout() {
+      document.body.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:center;height:100vh;
+        background-color:#fff0ff;color:#4b1c71;font-family:Segoe UI, sans-serif;flex-direction:column;">
+          <h1>Por favor apruébenos 💜</h1>
+        </div>`;
+    }
   </script>
 </body>
 </html>
