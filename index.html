@@ -7,14 +7,14 @@
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background-color: #E53DD9;
-      color: #E53DD9;
+      background-color: #E5D9FA;
+      color: #573DD9;
       margin: 0;
       padding: 0;
     }
 
     header {
-      background-color: #917EDC;
+      background-color: #573DD9;
       color: white;
       text-align: center;
       padding: 1rem 0;
@@ -34,7 +34,7 @@
 
     .question {
       margin-bottom: 1.5rem;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ddd;
       padding-bottom: 1rem;
     }
 
@@ -54,7 +54,8 @@
     }
 
     label:hover {
-      background-color: #E5D9FA;
+      background-color: #917EDC;
+      color: white;
     }
 
     input[type="radio"] {
@@ -64,7 +65,7 @@
     button {
       display: block;
       width: 100%;
-      background-color: #917EDC;
+      background-color: #573DD9;
       color: white;
       border: none;
       border-radius: 10px;
@@ -114,10 +115,10 @@
       const questionDiv = document.createElement("div");
       questionDiv.className = "question";
       questionDiv.innerHTML = `
-        <h3>Pregunta ${i}:¿Merecemos aprobar?</h3>
+        <h3>Pregunta ${i}: ¿Merecemos aprobar?</h3>
         <label><input type="radio" name="q${i}" value="a"> Por supuesto</label>
         <label><input type="radio" name="q${i}" value="b"> Claro</label>
-        <label><input type="radio" name="q${i}" value="c"> Por Favor</label>
+        <label><input type="radio" name="q${i}" value="c"> Por favor</label>
       `;
       quizForm.appendChild(questionDiv);
     }
