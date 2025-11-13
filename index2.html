@@ -16,7 +16,7 @@
   /* Lateral */
   .sidebar {
     width: 220px;
-    background-color: #917EDC;
+    background-color: #573DD9;
     color: white;
     display: flex;
     flex-direction: column;
@@ -32,26 +32,33 @@
   .tab-btn {
     background: none;
     border: none;
-    color: white;
+    color: #E5D9FA;
     text-align: left;
     padding: 12px 20px;
     font-size: 15px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s;
   }
 
   .tab-btn:hover, .tab-btn.active {
-    background-color: #b57edc;
+    background-color: #917EDC;
+    color: #573DD9;
   }
 
   .logout {
     margin-top: auto;
     padding: 12px 20px;
-    background-color: #b57edc;
+    background-color: #917EDC;
     border: none;
-    color: #917EDC;
+    color: #573DD9;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .logout:hover {
+    background-color: #E5D9FA;
+    color: #573DD9;
   }
 
   /* Contenido */
@@ -69,8 +76,8 @@
     display: block;
   }
 
-  h3 {
-    color: #917EDC;
+  h3, h4 {
+    color: #573DD9;
   }
 
   table {
@@ -80,7 +87,17 @@
   }
 
   table, th, td {
-    border: 1px solid #b57edc;
+    border: 1px solid #917EDC;
+  }
+
+  th {
+    background-color: #917EDC;
+    color: white;
+  }
+
+  td {
+    background-color: #E5D9FA;
+    color: #573DD9;
   }
 
   th, td {
@@ -89,17 +106,18 @@
   }
 
   input, select, textarea, button {
-    border: 1px solid #b57edc;
+    border: 1px solid #917EDC;
     border-radius: 4px;
     padding: 5px;
     margin: 3px;
   }
 
   button {
-    background-color: #b57edc;
-    color: #917EDC;
+    background-color: #573DD9;
+    color: #E5D9FA;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.3s, color 0.3s;
   }
 
   button:hover {
@@ -206,8 +224,8 @@
     function logout() {
       document.body.innerHTML = `
         <div style="display:flex;align-items:center;justify-content:center;height:100vh;
-        background-color:#E5D9FA;color:#917EDC;font-family:Segoe UI, sans-serif;flex-direction:column;">
-          <h1>Por favor apruébenos <3</h1>
+        background-color:#E5D9FA;color:#573DD9;font-family:Segoe UI, sans-serif;flex-direction:column;">
+          <h1>Por favor apruébenos <#</h1>
         </div>`;
     }
   </script>
